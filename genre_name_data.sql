@@ -1,0 +1,10 @@
+insert into genres (genre_name) values ('Action');
+insert into genres (genre_name) values ('Comedy');
+insert into genres (genre_name) values ('Drama');
+insert into genres (genre_name) values ('Horror');
+insert into genres (genre_name) values ('Sci-Fi');
+insert into genres (genre_name) values ('Romance');
+insert into genres (genre_name) values ('Thriller');
+insert into genres (genre_name) values ('Documentary');
+insert into genres (genre_name) values ('Adventure');
+insert into genres (genre_name) values ('Fantasy');

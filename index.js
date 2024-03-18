@@ -1,31 +1,44 @@
-var express = require("express");
-var app = express();
+const express = require("express");
+const methodOverride = require("method-override");
+const app = express();
+const port = 3000;
 
 // Setting the view engine to ejs
 app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 // Home page
 app.get("/", function (req, res) {
   res.render("pages/index");
 });
 
-// Movies page
-app.get("/movies", function (req, res) {
-  res.render("pages/movies");
+// Extra page if needed
+app.get("/about", function (req, res) {
+  res.render("pages/about");
 });
+
+// Movies page
+const moviesRouter = require("./routes/movies");
+app.use("/movies", moviesRouter);
 
 // Genres page
-app.get("/genres", function (req, res) {
-  res.render("pages/genres");
-});
+const genresRouter = require("./routes/genres");
+app.use("/genres", genresRouter);
 
 // Reviews page
-app.get("/reviews", function (req, res) {
-  res.render("pages/reviews");
+const reviewsRouter = require("./routes/reviews");
+app.use("/reviews", reviewsRouter);
+
+// All APIs
+// const apiRouter = require("./routes/api");
+// app.use("/api", apiRouter);
+
+app.use((req, res) => {
+  res.status(404).render("404");
 });
 
-const port = 3000;
-
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+  console.log(`App running on port ${port}`);
 });

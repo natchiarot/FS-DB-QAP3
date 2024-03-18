@@ -3,6 +3,8 @@ const methodOverride = require("method-override");
 const app = express();
 const port = 3000;
 
+global.DEBUG = false;
+
 // Setting the view engine to ejs
 app.set("view engine", "ejs");
 app.use(express.static("public"));

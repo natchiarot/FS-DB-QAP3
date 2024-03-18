@@ -32,9 +32,13 @@ const reviewsRouter = require("./routes/reviews");
 app.use("/reviews", reviewsRouter);
 
 // All APIs
-const apiRouter = require("./routes/api");
-app.use("/api", apiRouter);
+// const apiRouter = require("./routes/api");
+// app.use("/api", apiRouter);
+
+app.use((req, res) => {
+  res.status(404).render("404");
+});
 
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+  console.log(`App running on port ${port}`);
 });

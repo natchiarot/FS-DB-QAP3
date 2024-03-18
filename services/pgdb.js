@@ -7,4 +7,5 @@ const pool = new Pool({
   password: "supersecretconfidentialpassword",
   port: 5432,
 });
+
 module.exports = pool;

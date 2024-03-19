@@ -27,13 +27,24 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// (POST) A movie by title and director
+// (POST) Add a new movie by title and director
 router.post("/", async (req, res) => {
   try {
     await moviesDal.postMovie(req.body.title, req.body.director);
     res.status(201).json({ message: "Created Success" });
   } catch (error) {
     console.log("Error adding new movie: ", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// (PUT) Replace an existing movie + director with a new one
+router.put("/:id", async (req, res) => {
+  try {
+    await moviesDal.putMovie(req.body.id, req.body.title, req.body.director);
+    res.status(200).json({ message: "OK Success" });
+  } catch (error) {
+    console.log("Error replacing movie: ", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });

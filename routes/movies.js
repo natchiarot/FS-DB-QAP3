@@ -47,7 +47,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const title = req.body.title;
   const director = req.body.director;
-  if (title === null || director === null) {
+  if (!title || !director) {
     console.log("Error: must enter a movie title and its director.");
     res.render("400");
     return;
@@ -55,6 +55,47 @@ router.post("/", async (req, res) => {
   try {
     await moviesDal.postMovie(req.body.title, req.body.director);
     res.redirect("movies");
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
+// PUT - replaces, for bigger edits
+// (PUT) Replacing movie & director with new movie & director
+router.get("/:id/replace", async (req, res) => {
+  const id = parseInt(req.body.id);
+  const title = req.body.title;
+  const director = req.body.director;
+  if (id === 0 || isNaN(id) || !title || !director) {
+    console.log(
+      "Error: Must enter a valid ID, a movie title and its director."
+    );
+    res.render("400");
+    return;
+  }
+
+  try {
+    res.render("putmovie", {
+      movieId: req.body.id,
+      title: req.body.title,
+      director: req.body.director,
+    });
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
+//
+// HTTP methods
+// * that AREN'T apart of HTML
+
+// (PUT) replace movie & director
+router.put("/:id", async (req, res) => {
+  try {
+    await moviesDal.putMovie();
+    res.rendirect("movies");
   } catch (error) {
     console.log("Error: ", error);
     res.render("500");

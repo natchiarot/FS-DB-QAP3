@@ -1,11 +1,11 @@
 // Just for connecting to DB
 const Pool = require("pg").Pool; // Connection pool
 const pool = new Pool({
-  user: "nat",
-  host: "localhost",
-  database: "MovieArchive",
-  password: "supersecretconfidentialpassword",
-  port: 5432,
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DB,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
 });
 
 module.exports = pool;

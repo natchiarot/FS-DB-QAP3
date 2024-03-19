@@ -26,3 +26,14 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+// (POST) A movie by title and director
+router.post("/", async (req, res) => {
+  try {
+    await moviesDal.postMovie(req.body.title, req.body.director);
+    res.status(201).json({ message: "Created Success" });
+  } catch (error) {
+    console.log("Error adding new movie: ", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});

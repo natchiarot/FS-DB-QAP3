@@ -31,4 +31,21 @@ var getMoviesById = function (id) {
   });
 };
 
-module.exports = { getMovies, getMoviesById };
+// POST adding movies by title and director
+var postMovie = function (title, director) {
+  return new Promise(function (resolve, reject) {
+    const sql =
+      "INSERT INTO movies (title, director) \
+    VALUES ('%3, %5')";
+    dal.query(sql, [title, director], (err, result) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+      } else {
+        resolve(result.rows);
+      }
+    });
+  });
+};
+
+module.exports = { getMovies, getMoviesById, postMovie };

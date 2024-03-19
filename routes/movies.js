@@ -47,7 +47,12 @@ router.post("/", async (req, res) => {
   //     return;
   //   }
   try {
-    await moviesDal.postMovie(req.body.title, req.body.director);
+    await moviesDal.postMovie(
+      req.body.title,
+      req.body.director,
+      req.body.release_date,
+      req.body.director
+    );
     res.redirect("movies");
   } catch (error) {
     console.log("Error: ", error);
@@ -64,7 +69,7 @@ router.get("/:id/replace", async (req, res) => {
     res.render("404");
     return;
   }
-  const { title, director } = movie[0];
+  const { title, director, description } = movie[0];
   //   const id = parseInt(req.body.id);
   //   const title = req.body.title;
   //   const director = req.body.director;
@@ -81,6 +86,7 @@ router.get("/:id/replace", async (req, res) => {
       anId: req.params.id,
       title: title,
       director: director,
+      description: description,
     });
   } catch (error) {
     console.log("Error: ", error);
@@ -98,12 +104,13 @@ router.get("/:id/edit", async (req, res) => {
       res.render("404");
       return;
     }
-    const { title, director } = movie[0];
+    const { title, director, description } = movie[0];
 
     res.render("patchmovie", {
       anId: req.params.id,
       title: title,
       director: director,
+      description: description,
     });
   } catch (error) {
     console.log("Error: ", error);
@@ -122,12 +129,14 @@ router.get("/:id/delete", async (req, res) => {
       return;
     }
 
-    const { title, director } = movie[0];
+    const { title, director, release_date, description } = movie[0];
 
     res.render("deletemovie", {
       anId: req.params.id,
       title: title,
       director: director,
+      release_date: release_date,
+      description: description,
     });
   } catch (error) {
     console.log("Error: ", error);
@@ -143,7 +152,12 @@ router.get("/:id/delete", async (req, res) => {
 router.put("/:id", async (req, res) => {
   //   console.log(id);
   try {
-    await moviesDal.putMovie(req.params.id, req.body.title, req.body.director);
+    await moviesDal.putMovie(
+      req.params.id,
+      req.body.title,
+      req.body.director,
+      req.body.description
+    );
     res.redirect("/movies");
   } catch (error) {
     console.log("Error: ", error);
@@ -156,7 +170,8 @@ router.patch("/:id", async (req, res) => {
     await moviesDal.patchMovie(
       req.params.id,
       req.body.title,
-      req.body.director
+      req.body.director,
+      req.body.description
     );
     res.redirect("/movies");
   } catch (error) {
@@ -167,7 +182,13 @@ router.patch("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await moviesDal.deleteMovie(req.params.id, req.title, req.director);
+    await moviesDal.deleteMovie(
+      req.params.id,
+      req.title,
+      req.director,
+      req.body.release_date,
+      req.body.description
+    );
     res.redirect("/movies");
   } catch (error) {
     console.log("Error: ", error);

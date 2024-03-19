@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// (POST) Add a new movie by title and director
+// (POST) Add a new movie
 router.post("/", async (req, res) => {
   try {
     await moviesDal.postMovie(req.body.title, req.body.director);
@@ -38,10 +38,15 @@ router.post("/", async (req, res) => {
   }
 });
 
-// (PUT) Replace an existing movie title + director with a new one
+// (PUT) Replace an existing movie
 router.put("/:id", async (req, res) => {
   try {
-    await moviesDal.putMovie(req.params.id, req.body.title, req.body.director);
+    await moviesDal.putMovie(
+      req.params.id,
+      req.body.title,
+      req.body.director,
+      req.body.description
+    );
     res.status(200).json({ message: "OK Success" });
   } catch (error) {
     console.log("Error replacing movie: ", error);
@@ -49,13 +54,14 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// (PATCH) Edit an existing movie title/ director
+// (PATCH) Edit an existing movie
 router.patch("/:id", async (req, res) => {
   try {
     await moviesDal.patchMovie(
       req.params.id,
       req.body.title,
-      req.body.director
+      req.body.director,
+      req.body.description
     );
     res.status(200).json({ message: "OK Success" });
   } catch (error) {
@@ -70,7 +76,9 @@ router.delete("/:id", async (req, res) => {
     await moviesDal.deleteMovie(
       req.params.id,
       req.body.title,
-      req.body.director
+      req.body.director,
+      req.body.release_date,
+      req.body.description
     );
     res.status(200).json({ message: "OK Success" });
   } catch (error) {

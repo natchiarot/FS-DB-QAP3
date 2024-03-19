@@ -63,3 +63,14 @@ router.patch("/:id", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+// (DELETE) A movie by its ids
+router.delete("/:id", async (req, res) => {
+  try {
+    await moviesDal.deleteMovie(req.params.id, req.title, req.director);
+    res.status(200).json({ message: "OK Success" });
+  } catch (error) {
+    console.log("Error: ", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});

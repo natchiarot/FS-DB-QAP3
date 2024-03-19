@@ -58,6 +58,12 @@ router.post("/", async (req, res) => {
 // PUT - replaces, for bigger edits
 // (PUT) Replacing movie & director with new movie & director
 router.get("/:id/replace", async (req, res) => {
+  const movie = await moviesDal.getMoviesById(req.params.id);
+  if (!movie || movie.length === 0) {
+    console.log("Error: Movie not found.");
+    res.render("404");
+    return;
+  }
   //   const id = parseInt(req.body.id);
   //   const title = req.body.title;
   //   const director = req.body.director;
@@ -85,10 +91,40 @@ router.get("/:id/replace", async (req, res) => {
 // (PATCH) Editing movie title/director
 router.get("/:id/edit", async (req, res) => {
   try {
+    const movie = await moviesDal.getMoviesById(req.params.id);
+    if (!movie || movie.length === 0) {
+      console.log("Error: Movie not found.");
+      res.render("404");
+      return;
+    }
     res.render("patchmovie", {
       anId: req.params.id,
       title: req.query.title,
       director: req.query.director,
+    });
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
+// DELETE - removes
+// (DELETE) Removies a movie by its id
+router.get("/:id/delete", async (req, res) => {
+  try {
+    const movie = await moviesDal.getMoviesById(req.params.id);
+    if (!movie || movie.length === 0) {
+      console.log("Error: Movie not found.");
+      res.render("404");
+      return;
+    }
+
+    const { title, director } = movie[0];
+
+    res.render("deletemovie", {
+      anId: req.params.id,
+      title: title,
+      director: director,
     });
   } catch (error) {
     console.log("Error: ", error);
@@ -119,6 +155,16 @@ router.patch("/:id", async (req, res) => {
       req.body.title,
       req.body.director
     );
+    res.redirect("/movies");
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    await moviesDal.deleteMovie(req.params.id, req.title, req.director);
     res.redirect("/movies");
   } catch (error) {
     console.log("Error: ", error);

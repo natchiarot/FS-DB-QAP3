@@ -43,4 +43,22 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// (POST) movies by title and director
+router.post("/", async (req, res) => {
+  const title = req.body.title;
+  const director = req.body.director;
+  if (title === null || director === null) {
+    console.log("Error: must enter a movie title and its director.");
+    res.render("400");
+    return;
+  }
+  try {
+    await moviesDal.postMovie(req.body.title, req.body.director);
+    res.redirect("movies");
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
 module.exports = router;

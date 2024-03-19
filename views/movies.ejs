@@ -20,19 +20,19 @@
                 </div>
             </div>
 
-            <div class="col-sm-4">
-                <div class="well">
-                    <h3>Look I'm A Sidebar!</h3>
-                </div>
-            </div>
-
             <% theMovies.forEach(movie=> { %>
                 <b>
-                    <h1>Movie Title: </h1>
-                    <%= movie.title %>
-                        <br>
-                        <h1>Movie Director: </h1>
-                        <%= movie.director%>
+                    <h3>Movie Title: <%= movie.title %>
+                    </h3>
+
+                    <h4>Movie Director: <%= movie.director%>
+                    </h4>
+                    <p>
+                        <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
+                        <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
+                        <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
+                    </p>
+
 
                 </b><br>
                 <% }) %>

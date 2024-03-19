@@ -20,20 +20,14 @@
                 </div>
             </div>
 
-            <div class="col-sm-4">
-                <div class="well">
-                    <h3>Look I'm A Sidebar!</h3>
-                </div>
-            </div>
-
             <% if (theMovie.length> 0) var movie=theMovie[0]; { %>
                 <b>
-                    <h1>Movie Title: </h1>
-                    <%= movie.title %>
-                        <br>
-                        <h1>Movie Director: </h1>
-                        <%= movie.director%>
-                            <% } %>
+                    <h3>Movie Title: <%= movie.title %>
+                    </h3>
+
+                    <h3>Movie Director: <%= movie.director%>
+                    </h3>
+                    <% } %>
                 </b><br>
 
 

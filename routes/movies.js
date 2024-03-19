@@ -64,6 +64,7 @@ router.get("/:id/replace", async (req, res) => {
     res.render("404");
     return;
   }
+  const { title, director } = movie[0];
   //   const id = parseInt(req.body.id);
   //   const title = req.body.title;
   //   const director = req.body.director;
@@ -78,8 +79,8 @@ router.get("/:id/replace", async (req, res) => {
   try {
     res.render("putmovie", {
       anId: req.params.id,
-      title: req.query.title,
-      director: req.query.director,
+      title: title,
+      director: director,
     });
   } catch (error) {
     console.log("Error: ", error);
@@ -97,10 +98,12 @@ router.get("/:id/edit", async (req, res) => {
       res.render("404");
       return;
     }
+    const { title, director } = movie[0];
+
     res.render("patchmovie", {
       anId: req.params.id,
-      title: req.query.title,
-      director: req.query.director,
+      title: title,
+      director: director,
     });
   } catch (error) {
     console.log("Error: ", error);

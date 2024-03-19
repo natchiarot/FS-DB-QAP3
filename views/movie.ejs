@@ -28,9 +28,21 @@
                     <h4>Movie Director: <%= movie.director%>
                     </h4>
                     <p>
-                        Release date: <%= movie.release_date %> <br>
+                        Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' ,
+                            month: 'long' , day: 'numeric' }) %> <br>
                             Description: <%= movie.description %> <br>
                                 Genre: <%= movie.genre_name %>
+                    </p>
+
+                    <p>
+                        <% if (movie.rating && movie.rating.length> 0) { %>
+                            Reviews: <%= movie.rating %> <br>
+                                <i>
+                                    <%= movie.review_text %>
+                                </i>
+                                <% } else { %>
+                                    <i>No reviews yet.</i>
+                                    <% } %>
                     </p>
                 </b><br>
                 <% } %>

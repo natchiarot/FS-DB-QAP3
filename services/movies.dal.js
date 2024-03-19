@@ -3,11 +3,28 @@ const dal = require("./pgdb");
 // Getting all the movies
 var getMovies = function () {
   return new Promise(function (resolve, reject) {
-    const sql =
-      "SELECT movies.movie_id, movies.title, movies.release_date, movies.director, movies.description, movies.poster_url, genres.genre_name \
-       FROM movies \
-      Inner JOIN genres ON movies.genre_id=genres.genre_id \
-      ORDER BY movie_id ASC LIMIT 50";
+    const sql = `SELECT 
+      movies.movie_id, 
+      movies.title, 
+      movies.release_date,
+      movies.director, 
+      movies.description, 
+      movies.poster_url, 
+      genres.genre_name,
+      reviews.review_id,
+      reviews.rating,
+      reviews.review_text
+    FROM movies 
+    INNER JOIN 
+      genres ON movies.genre_id=genres.genre_id 
+    LEFT JOIN 
+      reviews ON movies.movie_id = reviews.movie_id
+    ORDER BY
+      movies.movie_id ASC 
+    LIMIT 50`;
+    // LEFT JOIN returns all records from the left table (movies)
+    // to ensure that even if the movie doesn't have any reviews it will still
+    // be included.
     dal.query(sql, [], (err, result) => {
       if (err) {
         console.log("Error: ", err);
@@ -22,11 +39,23 @@ var getMovies = function () {
 // Getting movie by id
 var getMoviesById = function (id) {
   return new Promise(function (resolve, reject) {
-    const sql =
-      "SELECT movies.movie_id, movies.title, movies.release_date, movies.director, movies.description, movies.poster_url, genres.genre_name \
-    FROM movies \
-   Inner JOIN genres ON movies.genre_id=genres.genre_id \
-    WHERE movie_id =$1";
+    const sql = `SELECT 
+    movies.movie_id, 
+    movies.title, 
+    movies.release_date,
+    movies.director, 
+    movies.description, 
+    movies.poster_url, 
+    genres.genre_name,
+    reviews.review_id,
+    reviews.rating,
+    reviews.review_text
+  FROM movies 
+  INNER JOIN 
+    genres ON movies.genre_id=genres.genre_id 
+  LEFT JOIN 
+    reviews ON movies.movie_id = reviews.movie_id
+  WHERE movies.movie_id =$1`;
     dal.query(sql, [id], (err, result) => {
       if (err) {
         console.log("Error: ", err);
@@ -65,7 +94,7 @@ var putMovie = function (id, title, director, description) {
     const sql =
       "UPDATE movies \
     SET title = $2, director = $3, description = $4 \
-    WHERE movie_id = $1";
+    WHERE movies.movie_id = $1";
     dal.query(sql, [id, title, director, description], (err, result) => {
       if (err) {
         console.log("Error: ", err);
@@ -83,7 +112,7 @@ var patchMovie = function (id, title, director, description) {
     const sql =
       "UPDATE movies \
     SET title = $2, director = $3, description = $4 \
-    WHERE movie_id = $1";
+    WHERE movies.movie_id = $1";
     dal.query(sql, [id, title, director, description], (err, result) => {
       if (err) {
         console.log("Error: ", err);

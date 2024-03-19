@@ -25,10 +25,15 @@
                     <h3>Movie Title: <%= movie.title %>
                     </h3>
 
-                    <h3>Movie Director: <%= movie.director%>
-                    </h3>
-                    <% } %>
+                    <h4>Movie Director: <%= movie.director%>
+                    </h4>
+                    <p>
+                        Release date: <%= movie.release_date %> <br>
+                            Description: <%= movie.description %> <br>
+                                Genre: <%= movie.genre_name %>
+                    </p>
                 </b><br>
+                <% } %>
 
 
         </div>

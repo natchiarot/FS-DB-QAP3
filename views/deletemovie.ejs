@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="jumbotron">
+                    <h1>Movies</h1>
+                    <p>Check out all the movies</p>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="well">
+                    <h3>Look I'm A Sidebar!</h3>
+                </div>
+            </div>
+            <b>
+                <form action="/movies/<%= locals.anId %>?_method=DELETE" method="POST">
+                    <label>WARNING: Are you sure you want to delete this movie?
+                        <input type="text" id="<%=locals.anId%>" name="movie" value="<%= title %> by <%= director %>"
+                            readonly>
+                    </label>
+                    <p>Once completed this action cannot be undone.</p>
+                    <button>Delete</button>
+                </form>
+            </b>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

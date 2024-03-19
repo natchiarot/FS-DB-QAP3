@@ -86,4 +86,34 @@ var patchMovie = function (id, title, director) {
   });
 };
 
-module.exports = { getMovies, getMoviesById, postMovie, putMovie, patchMovie };
+var deleteMovie = function (id) {
+  return new Promise(function (resolve, reject) {
+    const reviewSql = "DELETE FROM reviews WHERE movie_id = $1";
+    dal.query(reviewSql, [id], (err) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+        return;
+      }
+    });
+
+    const movieSql = "DELETE FROM movies WHERE movie_id = $1";
+    dal.query(movieSql, [id], (err, result) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+      } else {
+        resolve(result.rows);
+      }
+    });
+  });
+};
+
+module.exports = {
+  getMovies,
+  getMoviesById,
+  postMovie,
+  putMovie,
+  patchMovie,
+  deleteMovie,
+};

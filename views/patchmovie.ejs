@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="jumbotron">
+                    <h1>Movies</h1>
+                    <p>Check out all the movies</p>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="well">
+                    <h3>Look I'm A Sidebar!</h3>
+                </div>
+            </div>
+            <b>
+                <form action="/movies/<%= locals.anId %>?_method=PATCH" method="POST">
+                    <label>Edit movie title and director:
+                        <input type="text" name="title" value="<%= locals.title %>" required>
+                        <input type="text" name="director" value="<%= locals.director%>" required>
+                    </label>
+                    <button>Edit</button>
+                </form>
+            </b>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

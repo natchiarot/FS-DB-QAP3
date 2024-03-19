@@ -20,19 +20,15 @@
                 </div>
             </div>
 
-            <div class="col-sm-4">
-                <div class="well">
-                    <h3>Look I'm A Sidebar!</h3>
-                </div>
-            </div>
             <b>
                 <form action="/movies/<%= locals.anId %>?_method=PUT" method="POST">
                     <label>Replace movie title and director:
-                        <input type="text" name="title" value="<%= locals.title %>" required>
-                        <input type="text" name="director" value="<%= locals.director%>" required>
+                        <input type="text" name="title" value="<%= title %>" required>
+                        <input type="text" name="director" value="<%= director%>" required>
                     </label>
                     <button>Replace</button>
                 </form>
+                <a href="/movies"><button>Cancel</button></a>
             </b>
         </div>
     </main>

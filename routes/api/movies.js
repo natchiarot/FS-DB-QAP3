@@ -67,7 +67,11 @@ router.patch("/:id", async (req, res) => {
 // (DELETE) A movie by its ids
 router.delete("/:id", async (req, res) => {
   try {
-    await moviesDal.deleteMovie(req.params.id, req.title, req.director);
+    await moviesDal.deleteMovie(
+      req.params.id,
+      req.body.title,
+      req.body.director
+    );
     res.status(200).json({ message: "OK Success" });
   } catch (error) {
     console.log("Error: ", error);

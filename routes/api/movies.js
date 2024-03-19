@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
 // (PUT) Replace an existing movie + director with a new one
 router.put("/:id", async (req, res) => {
   try {
-    await moviesDal.putMovie(req.body.id, req.body.title, req.body.director);
+    await moviesDal.putMovie(req.params.id, req.body.title, req.body.director);
     res.status(200).json({ message: "OK Success" });
   } catch (error) {
     console.log("Error replacing movie: ", error);

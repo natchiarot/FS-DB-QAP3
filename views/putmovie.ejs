@@ -26,11 +26,13 @@
                 </div>
             </div>
             <b>
-                <h1>Movie Title: </h1>
-                <%= movie.title %>
-                    <br>
-                    <h1>Movie Director: </h1>
-                    <%= movie.director%>
+                <form action="/movies/<%= locals.anId %>?_method=PUT" method="POST">
+                    <label>Replace movie title and director:
+                        <input type="text" name="title" value="<%= locals.title %>" required>
+                        <input type="text" name="director" value="<%= locals.director%>" required>
+                    </label>
+                    <button>Replace</button>
+                </form>
             </b>
         </div>
     </main>

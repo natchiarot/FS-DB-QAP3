@@ -22,12 +22,6 @@ router.get("/", async (req, res) => {
 // (GET) Movies by id
 router.get("/:id", async (req, res) => {
   //   const theMovie = [{ title: "Jaws", director: "Stephen Spielberg" }];
-  const id = parseInt(req.params.id);
-  if (id === 0 || isNaN(id)) {
-    console.log("Error: Invalid ID provided");
-    res.render("400");
-    return;
-  }
 
   try {
     let theMovie = await moviesDal.getMoviesById(req.params.id);
@@ -45,13 +39,13 @@ router.get("/:id", async (req, res) => {
 
 // (POST) movies by title and director
 router.post("/", async (req, res) => {
-  const title = req.body.title;
-  const director = req.body.director;
-  if (!title || !director) {
-    console.log("Error: must enter a movie title and its director.");
-    res.render("400");
-    return;
-  }
+  //   const title = req.body.title;
+  //   const director = req.body.director;
+  //   if (!title || !director) {
+  //     console.log("Error: must enter a movie title and its director.");
+  //     res.render("400");
+  //     return;
+  //   }
   try {
     await moviesDal.postMovie(req.body.title, req.body.director);
     res.redirect("movies");
@@ -64,22 +58,22 @@ router.post("/", async (req, res) => {
 // PUT - replaces, for bigger edits
 // (PUT) Replacing movie & director with new movie & director
 router.get("/:id/replace", async (req, res) => {
-  const id = parseInt(req.body.id);
-  const title = req.body.title;
-  const director = req.body.director;
-  if (id === 0 || isNaN(id) || !title || !director) {
-    console.log(
-      "Error: Must enter a valid ID, a movie title and its director."
-    );
-    res.render("400");
-    return;
-  }
+  //   const id = parseInt(req.body.id);
+  //   const title = req.body.title;
+  //   const director = req.body.director;
+  //   if (id === 0 || isNaN(id) || !title || !director) {
+  //     console.log(
+  //       "Error: Must enter a valid ID, a movie title and its director."
+  //     );
+  //     res.render("400");
+  //     return;
+  //   }
 
   try {
     res.render("putmovie", {
-      movieId: req.body.id,
-      title: req.body.title,
-      director: req.body.director,
+      anId: req.params.id,
+      title: req.query.title,
+      director: req.query.director,
     });
   } catch (error) {
     console.log("Error: ", error);
@@ -93,9 +87,10 @@ router.get("/:id/replace", async (req, res) => {
 
 // (PUT) replace movie & director
 router.put("/:id", async (req, res) => {
+  //   console.log(id);
   try {
-    await moviesDal.putMovie();
-    res.rendirect("movies");
+    await moviesDal.putMovie(req.params.id, req.body.title, req.body.director);
+    res.redirect("/movies/");
   } catch (error) {
     console.log("Error: ", error);
     res.render("500");

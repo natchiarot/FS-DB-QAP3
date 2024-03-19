@@ -4,8 +4,10 @@ const dal = require("./pgdb");
 var getMovies = function () {
   return new Promise(function (resolve, reject) {
     const sql =
-      "SELECT movie_id, title, director FROM movies \
-    ORDER BY movie_id ASC";
+      "SELECT movies.movie_id, movies.title, movies.release_date, movies.director, movies.description, movies.poster_url, genres.genre_name \
+       FROM movies \
+      Inner JOIN genres ON movies.genre_id=genres.genre_id \
+      ORDER BY movie_id ASC LIMIT 50";
     dal.query(sql, [], (err, result) => {
       if (err) {
         console.log("Error: ", err);
@@ -21,7 +23,10 @@ var getMovies = function () {
 var getMoviesById = function (id) {
   return new Promise(function (resolve, reject) {
     const sql =
-      "SELECT movie_id, title, director FROM movies WHERE movie_id =$1";
+      "SELECT movies.movie_id, movies.title, movies.release_date, movies.director, movies.description, movies.poster_url, genres.genre_name \
+    FROM movies \
+   Inner JOIN genres ON movies.genre_id=genres.genre_id \
+    WHERE movie_id =$1";
     dal.query(sql, [id], (err, result) => {
       if (err) {
         console.log("Error: ", err);

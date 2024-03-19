@@ -28,6 +28,11 @@
                     <h4>Movie Director: <%= movie.director%>
                     </h4>
                     <p>
+                        <%= movie.release_date %> <br>
+                            <%= movie.description %> <br>
+                                <%= movie.genre_name %>
+                    </p>
+                    <p>
                         <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
                         <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
                         <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>

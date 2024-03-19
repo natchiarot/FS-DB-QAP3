@@ -50,6 +50,7 @@ var postMovie = function (title, director) {
   });
 };
 
+// PUT replacing movie with new title and director
 var putMovie = function (id, title, director) {
   return new Promise(function (resolve, reject) {
     const sql =
@@ -67,4 +68,22 @@ var putMovie = function (id, title, director) {
   });
 };
 
-module.exports = { getMovies, getMoviesById, postMovie, putMovie };
+// PATCH editing movie title/ director
+var patchMovie = function (id, title, director) {
+  return new Promise(function (resolve, reject) {
+    const sql =
+      "UPDATE movies \
+    SET title = $2, director = $3 \
+    WHERE movie_id = $1";
+    dal.query(sql, [id, title, director], (err, result) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+      } else {
+        resolve(result.rows);
+      }
+    });
+  });
+};
+
+module.exports = { getMovies, getMoviesById, postMovie, putMovie, patchMovie };

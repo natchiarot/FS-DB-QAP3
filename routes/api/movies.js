@@ -38,13 +38,28 @@ router.post("/", async (req, res) => {
   }
 });
 
-// (PUT) Replace an existing movie + director with a new one
+// (PUT) Replace an existing movie title + director with a new one
 router.put("/:id", async (req, res) => {
   try {
     await moviesDal.putMovie(req.params.id, req.body.title, req.body.director);
     res.status(200).json({ message: "OK Success" });
   } catch (error) {
     console.log("Error replacing movie: ", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// (PATCH) Edit an existing movie title/ director
+router.patch("/:id", async (req, res) => {
+  try {
+    await moviesDal.patchMovie(
+      req.params.id,
+      req.body.title,
+      req.body.director
+    );
+    res.status(200).json({ message: "OK Success" });
+  } catch (error) {
+    console.log("Error: ", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });

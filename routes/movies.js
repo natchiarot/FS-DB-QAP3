@@ -81,6 +81,21 @@ router.get("/:id/replace", async (req, res) => {
   }
 });
 
+// PATCH - edits
+// (PATCH) Editing movie title/director
+router.get("/:id/edit", async (req, res) => {
+  try {
+    res.render("patchmovie", {
+      anId: req.params.id,
+      title: req.query.title,
+      director: req.query.director,
+    });
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
 //
 // HTTP methods
 // * that AREN'T apart of HTML
@@ -90,7 +105,21 @@ router.put("/:id", async (req, res) => {
   //   console.log(id);
   try {
     await moviesDal.putMovie(req.params.id, req.body.title, req.body.director);
-    res.redirect("/movies/");
+    res.redirect("/movies");
+  } catch (error) {
+    console.log("Error: ", error);
+    res.render("500");
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    await moviesDal.patchMovie(
+      req.params.id,
+      req.body.title,
+      req.body.director
+    );
+    res.redirect("/movies");
   } catch (error) {
     console.log("Error: ", error);
     res.render("500");

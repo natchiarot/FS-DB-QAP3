@@ -52,21 +52,23 @@
                                 </p>
                                 <!-- Chose to do the if statement based on the rating because the rating has the NOT NULL property.
                     Therefore, if there's no rating, there is no review at all. -->
-                                <p>
-                                    <% if (movie.rating && movie.rating.length> 0) { %>
-                                        Reviews: <%= movie.rating %> <br>
-                                            <i>
-                                                <%= movie.review_text %>
-                                            </i>
-                                            <% } else { %>
-                                                <i>No reviews yet.</i>
-                                                <% } %>
-                                </p>
-                                <p>
-                                    <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
-                                    <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
-                                    <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
-                                </p>
+
+                                <% if (movie.rating && movie.rating.length> 0) { %>
+                                    Reviews: <%= movie.rating %> <br>
+                                        <i>
+                                            <%= movie.review_text %>
+                                        </i>
+                                        <% } else { %>
+                                            <i>No reviews yet.</i>
+                                            <% } %>
+
+                                                <a href="/reviews/<%= movie.movie_id %>/postreview">Add Review</a>
+                                                </p>
+                                                <p>
+                                                    <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
+                                                    <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
+                                                    <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
+                                                </p>
 
 
                 </b><br>

@@ -30,7 +30,12 @@ router.get("/:id", async (req, res) => {
 // (POST) Add a new movie
 router.post("/", async (req, res) => {
   try {
-    await moviesDal.postMovie(req.body.title, req.body.director);
+    await moviesDal.postMovie(
+      req.body.title,
+      req.body.release_date,
+      req.body.director,
+      req.body.description
+    );
     res.status(201).json({ message: "Created Success" });
   } catch (error) {
     console.log("Error adding new movie: ", error);
@@ -73,13 +78,7 @@ router.patch("/:id", async (req, res) => {
 // (DELETE) A movie by its ids
 router.delete("/:id", async (req, res) => {
   try {
-    await moviesDal.deleteMovie(
-      req.params.id,
-      req.body.title,
-      req.body.director,
-      req.body.release_date,
-      req.body.description
-    );
+    await moviesDal.deleteMovie(req.params.id);
     res.status(200).json({ message: "OK Success" });
   } catch (error) {
     console.log("Error: ", error);

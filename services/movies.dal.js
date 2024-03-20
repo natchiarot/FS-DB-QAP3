@@ -20,8 +20,7 @@ var getMovies = function () {
     LEFT JOIN 
       reviews ON movies.movie_id = reviews.movie_id
     ORDER BY
-      movies.movie_id ASC 
-    LIMIT 50`;
+      movies.movie_id ASC`;
     // LEFT JOIN returns all records from the left table (movies)
     // to ensure that even if the movie doesn't have any reviews it will still
     // be included.
@@ -68,8 +67,13 @@ var getMoviesById = function (id) {
 };
 
 // POST adding movies by title and director
-var postMovie = function (title, director, release_date, description) {
+var postMovie = function (title, release_date, director, description) {
   return new Promise(function (resolve, reject) {
+    // Debugging when I was having trouble with adding a movie
+    // console.log("Title:", title);
+    // console.log("Release Date:", release_date);
+    // console.log("Director:", director);
+    // console.log("Description:", description);
     const sql =
       "INSERT INTO movies (title, release_date, director, description) \
     VALUES ($1, $3, $2, $4)";

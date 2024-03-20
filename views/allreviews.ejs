@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <%- include('../partials/head'); %>
+    <%- include('./partials/head'); %>
 </head>
 
 <body class="container">
 
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('./partials/header'); %>
     </header>
 
     <main>
@@ -25,11 +25,21 @@
                     <h3>Look I'm A Sidebar!</h3>
                 </div>
             </div>
+            <% theReview.forEach(review=> { %>
+                <b>
+                    <p>
+
+                        Rating: <%= review.rating %> <br>
+                            <%= review.review_text %> <br>
+                    </p>
+                </b>
+                <% }) %>
+                    <a href="/movies">Back</a>
         </div>
     </main>
 
     <footer>
-        <%- include('../partials/footer'); %>
+        <%- include('./partials/footer'); %>
     </footer>
 
 </body>

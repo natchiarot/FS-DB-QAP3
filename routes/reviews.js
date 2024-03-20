@@ -13,6 +13,21 @@ router.get("/:movie_id/postreview", (req, res) => {
   }
 });
 
+router.get("/:movie_id/allreviews", async (req, res) => {
+  try {
+    let theReview = await reviewsDal.getReviewsById(req.params.movie_id);
+    if (theReview && theReview.length > 0) {
+      res.render("allreviews", { theReview });
+    } else {
+      console.log("Error: The ID entered does not exist.");
+      res.render("404");
+    }
+  } catch (error) {
+    console.log(error);
+    res.render("500");
+  }
+});
+
 // (POST) A review
 router.post("/:movie_id/postreview", async (req, res) => {
   let movie_id = req.params.movie_id;

@@ -11,6 +11,20 @@ router.get("/:movie_id/postreview", (req, res) => {
   }
 });
 
+router.get("/:movie_id/allreviews", async (req, res) => {
+  try {
+    let theReview = await reviewsDal.getReviewsById(req.params.movie_id);
+    if (theReview.length > 0) {
+      res.json(theReview);
+    } else {
+      res.status(404).json({ message: "Not Found" });
+    }
+  } catch (error) {
+    console.log("Error getting a review by it's id: ", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 router.post("/:movie_id/postreview", async (req, res) => {
   try {
     await reviewsDal.postReview(

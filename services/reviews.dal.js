@@ -1,5 +1,23 @@
 const dal = require("./pgdb");
 
+var getReviewsById = function (movie_id) {
+  return new Promise(function (resolve, reject) {
+    const sql = `SELECT 
+        rating,
+        review_text
+      FROM reviews 
+      WHERE movie_id = $1`;
+    dal.query(sql, [movie_id], (err, result) => {
+      if (err) {
+        console.log("Error: ", err);
+        reject(err);
+      } else {
+        resolve(result.rows);
+      }
+    });
+  });
+};
+
 var postReview = function (movie_id, rating, review_text) {
   return new Promise(function (resolve, reject) {
     const sql =
@@ -16,4 +34,4 @@ var postReview = function (movie_id, rating, review_text) {
   });
 };
 
-module.exports = { postReview };
+module.exports = { getReviewsById, postReview };

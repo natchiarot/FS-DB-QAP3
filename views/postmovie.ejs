@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="jumbotron">
+                    <h1>Movies</h1>
+                    <p>Check out all the movies</p>
+                </div>
+            </div>
+
+            <b>
+                <!-- <h3>Add Movie:</h3>
+                <form action="/movies/post" method="POST">
+                    <label>Title</label>
+                    <input type="text" id="title" value="<%= title %>" required>
+                    <label>Director</label>
+                    <input type="text" id="director" value="<%= director %>" required>
+                    <label>Release Date</label>
+                    <input type="datetime-local" id="release_date" value="<%= release_date %>" required>
+                    <label>Description</label>
+                    <input type="text" id="description" value="<%= description %>" required>
+
+                    <button>Add</button>
+                </form> -->
+                <a href="/movies"><button>Cancel</button></a>
+            </b>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

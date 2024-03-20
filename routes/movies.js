@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const moviesDal = require("../services/movies.dal");
+const moment = require("moment");
 
 // (GET) Displaying all movies to UI
 router.get("/", async (req, res) => {
@@ -39,21 +40,21 @@ router.get("/:id", async (req, res) => {
 
 // (POST) movies by title and director
 router.post("/", async (req, res) => {
-  //   const title = req.body.title;
-  //   const director = req.body.director;
-  //   if (!title || !director) {
-  //     console.log("Error: must enter a movie title and its director.");
-  //     res.render("400");
-  //     return;
-  //   }
+  const { title, director, description } = req.body;
+  let { release_date } = req.body;
+
   try {
-    await moviesDal.postMovie(
-      req.body.title,
-      req.body.director,
-      req.body.release_date,
-      req.body.director
-    );
-    res.redirect("movies");
+    if (!title || !director || !release_date || !description) {
+      console.log("Error: Invalid movie data.");
+      return res.status(400).render("400");
+    }
+
+    // Parsing release_date string using Moment.js and formatting it to match the
+    // format required by the postgresql database (YYYY-MM-DD).
+    release_date = moment(release_date).format("YYYY-MM-DD");
+
+    await moviesDal.postMovie(title, director, release_date, description);
+    res.redirect("/movies");
   } catch (error) {
     console.log("Error: ", error);
     res.render("500");

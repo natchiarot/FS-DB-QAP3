@@ -5,16 +5,15 @@
     <%- include('./partials/head'); %>
 </head>
 
+<header>
+    <%- include('./partials/header'); %>
+</header>
+
 <body class="container">
-
-    <header>
-        <%- include('./partials/header'); %>
-    </header>
-
     <main>
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="jumbotron">
+        <div>
+            <div>
+                <div class="movies">
                     <h1>Movies</h1>
                     <p>Check out all the movies</p>
                 </div>
@@ -35,47 +34,56 @@
                 </form>
             </div>
 
-            <% theMovies.forEach(movie=> { %>
-                <b>
-                    <p>
+            <!-- displayedMovieIds is for only one copy of each movie showing up, regardless of how many reviews are posted for it. -->
+            <!-- first creating an empty object. This will store the movie_id(s) that have been displayed -->
+            <% let displayedMovieIds={} %>
+                <% theMovies.forEach(movie=> { %>
+                    <!-- if the movie doesn't exist yet (hasn't been displayed) the code for displaying the movie will execute. -->
+                    <% if (!displayedMovieIds[movie.movie_id]) { %>
+                        <b>
+                            <p>
 
-                    <h3>Movie Title: <%= movie.title %>
-                    </h3>
+                            <h3>Movie Title: <%= movie.title %>
+                            </h3>
 
-                    <h4>Movie Director: <%= movie.director%>
-                    </h4>
+                            <h4>Movie Director: <%= movie.director%>
+                            </h4>
 
-                    Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' , month: 'long' ,
-                        day: 'numeric' }) %> <br>
-                        Description: <%= movie.description %> <br>
-                            Genre: <%= movie.genre_name %>
+                            Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' ,
+                                month: 'long' , day: 'numeric' }) %> <br>
+                                Description: <%= movie.description %> <br>
+                                    Genre: <%= movie.genre_name %>
 
-                                </p>
-                                <!-- Chose to do the if statement based on the rating because the rating has the NOT NULL property.
+                                        </p>
+                                        <!-- Chose to do the if statement based on the rating because the rating has the NOT NULL property.
                     Therefore, if there's no rating, there is no review at all. -->
 
-                                <% if (movie.rating && movie.rating.length> 0) { %>
-                                    <h6>Most Recent Review:</h6>
-                                    Rating: <%= movie.rating %> <br>
-                                        <i>
-                                            <%= movie.review_text %>
-                                        </i>
-                                        <a href="/reviews/<%= movie.movie_id %>/allreviews">See All Reviews</a>
-                                        <% } else { %>
-                                            <i>No reviews yet.</i>
-                                            <% } %>
+                                        <% if (movie.rating && movie.rating.length> 0) { %>
+                                            <h6>Most Recent Review:</h6>
+                                            Rating: <%= movie.rating %> <br>
+                                                <i>
+                                                    <%= movie.review_text %>
+                                                </i>
+                                                <a href="/reviews/<%= movie.movie_id %>/allreviews">See All Reviews</a>
+                                                <% } else { %>
+                                                    <i>No reviews yet.</i>
+                                                    <% } %>
 
-                                                <a href="/reviews/<%= movie.movie_id %>/postreview">Add Review</a>
-                                                </p>
-                                                <p>
-                                                    <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
-                                                    <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
-                                                    <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
-                                                </p>
+                                                        <a href="/reviews/<%= movie.movie_id %>/postreview">Add
+                                                            Review</a>
+                                                        </p>
+                                                        <p>
+                                                            <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
+                                                            <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
+                                                            <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
+                                                        </p>
 
 
-                </b><br>
-                <% }) %>
+                        </b><br>
+                        <!-- the movie_id is then added to displayedMovieIds which is then set to true (means it has been displayed). -->
+                        <% displayedMovieIds[movie.movie_id]=true; %>
+                            <% } %>
+                                <% }) %>
 
         </div>
     </main>

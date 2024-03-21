@@ -19,20 +19,21 @@
                     <p>Check out all the movies</p>
                 </div>
             </div>
+            <div>
+                <h3>Add Movie:</h3>
+                <form action="/movies" method="POST">
+                    <label>Title</label>
+                    <input type="text" id="title" name="title" required>
+                    <label>Release Date</label>
+                    <input type="date" id="release_date" name="release_date" required>
+                    <label>Director</label>
+                    <input type="text" id="director" name="director" required>
+                    <label>Description</label>
+                    <input type="text" id="description" name="description" required>
 
-            <h3>Add Movie:</h3>
-            <form action="/movies" method="POST">
-                <label>Title</label>
-                <input type="text" id="title" name="title" required>
-                <label>Release Date</label>
-                <input type="date" id="release_date" name="release_date" required>
-                <label>Director</label>
-                <input type="text" id="director" name="director" required>
-                <label>Description</label>
-                <input type="text" id="description" name="description" required>
-
-                <button>Add</button>
-            </form>
+                    <button>Add</button>
+                </form>
+            </div>
 
             <% theMovies.forEach(movie=> { %>
                 <b>
@@ -52,21 +53,25 @@
                                 </p>
                                 <!-- Chose to do the if statement based on the rating because the rating has the NOT NULL property.
                     Therefore, if there's no rating, there is no review at all. -->
-                                <p>
-                                    <% if (movie.rating && movie.rating.length> 0) { %>
-                                        Reviews: <%= movie.rating %> <br>
-                                            <i>
-                                                <%= movie.review_text %>
-                                            </i>
-                                            <% } else { %>
-                                                <i>No reviews yet.</i>
-                                                <% } %>
-                                </p>
-                                <p>
-                                    <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
-                                    <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
-                                    <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
-                                </p>
+
+                                <% if (movie.rating && movie.rating.length> 0) { %>
+                                    <h6>Most Recent Review:</h6>
+                                    Rating: <%= movie.rating %> <br>
+                                        <i>
+                                            <%= movie.review_text %>
+                                        </i>
+                                        <a href="/reviews/<%= movie.movie_id %>/allreviews">See All Reviews</a>
+                                        <% } else { %>
+                                            <i>No reviews yet.</i>
+                                            <% } %>
+
+                                                <a href="/reviews/<%= movie.movie_id %>/postreview">Add Review</a>
+                                                </p>
+                                                <p>
+                                                    <a href="/movies/<%=movie.movie_id%>/edit">Edit</a>
+                                                    <a href="/movies/<%=movie.movie_id%>/replace">Replace</a>
+                                                    <a href="/movies/<%=movie.movie_id%>/delete">Delete</a>
+                                                </p>
 
 
                 </b><br>

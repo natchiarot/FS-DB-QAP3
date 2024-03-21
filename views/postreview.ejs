@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head'); %>
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="jumbotron">
+                    <h1>Movies</h1>
+                    <p>Check out all the movies</p>
+                </div>
+            </div>
+
+            <b>
+                <h2>Add Review</h2>
+                <form action="/reviews/<%=movie_id%>/postreview" method="POST">
+                    <label for="rating">Rating:</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" step="0.5" required>
+                    <label for="review_text">Review Text:</label>
+                    <textarea id="review_text" name="review_text" required></textarea> <br>
+                    <button>Submit Review</button>
+                </form>
+                <a href="/movies"><button>Cancel</button></a>
+            </b>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

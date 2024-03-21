@@ -29,9 +29,9 @@ app.get("/about", function (req, res) {
 const moviesRouter = require("./routes/movies");
 app.use("/movies", moviesRouter);
 
-// // Reviews page
-// const reviewsRouter = require("./routes/reviews");
-// app.use("/reviews", reviewsRouter);
+// Reviews page
+const reviewsRouter = require("./routes/reviews");
+app.use("/reviews", reviewsRouter);
 
 // All APIs
 // const apiRouter = require("./routes/api");

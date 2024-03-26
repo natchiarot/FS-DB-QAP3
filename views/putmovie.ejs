@@ -12,25 +12,23 @@
     </header>
 
     <main>
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="jumbotron">
-                    <h1>Movies</h1>
-                    <p>Check out all the movies</p>
-                </div>
+        <div class="container">
+            <div class="movies">
+                <h1>Movies</h1>
+                <p>Replace a Movie</p>
             </div>
 
-            <b>
+            <div class="movie">
                 <form action="/movies/<%= locals.anId %>?_method=PUT" method="POST">
                     <label>Replace movie title and director:
                         <input type="text" name="title" value="<%= title %>" required>
                         <input type="text" name="director" value="<%= director%>" required>
                         <input type="text" name="description" value="<%= description%>" required>
                     </label>
-                    <button>Replace</button>
+                    <button class="button">Replace</button>
                 </form>
-                <a href="/movies"><button>Cancel</button></a>
-            </b>
+                <a href="/movies"><button class="button">Cancel</button></a>
+            </div>
         </div>
     </main>
 

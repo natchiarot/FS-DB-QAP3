@@ -20,7 +20,8 @@ var getMovies = function () {
     LEFT JOIN 
       reviews ON movies.movie_id = reviews.movie_id
     ORDER BY
-      movies.movie_id ASC`;
+      movies.movie_id DESC
+    LIMIT 25`;
     // LEFT JOIN returns all records from the left table (movies)
     // to ensure that even if the movie doesn't have any reviews it will still
     // be included.

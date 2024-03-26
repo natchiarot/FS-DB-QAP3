@@ -1,37 +1,166 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .movies {
-  background-color: grey;
+  background-color: rgb(172, 172, 173);
   padding: 10px;
+  width: 100%;
+  text-align: center;
+  /* border-radius: 5px; */
+  position: relative;
+}
+
+.add-movie {
+  /* background-color: rgb(160, 160, 160); */
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px;
+  align-items: flex-end;
+  margin-left: 80%;
+  position: absolute;
+  top: 200px;
+}
+
+.add-movie input[type="radio"] {
+  display: none;
+}
+
+.add-movie .movie-label {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16pt;
+  background-color: rgb(172, 172, 173);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-movie .tab {
+  background-color: rgb(208, 208, 208);
+  /* border: 5px solid red; */
+  padding: 20px;
+  width: 100%;
+  display: none;
+}
+
+.add-movie input[type="radio"]:checked + label + .tab {
+  display: block;
+}
+
+.add-movie input[type="radio"]:checked + label {
+  background-color: rgb(208, 208, 208);
 }
 
 nav {
-  background-color: aquamarine;
+  background-color: rgb(208, 208, 208);
+  /* border-radius: 5px; */
+  width: 100%;
   padding: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  font-size: 20pt;
   text-align: center;
   flex-direction: row;
+  text-decoration: none;
+  box-shadow: 1em;
 }
 
-nav li {
-  list-style-type: none;
+.nav-item-1 {
+  flex-grow: 0.5;
+  text-align: start;
 }
 
-nav li a {
+.nav-item-2 a {
+  text-decoration: none;
+  font-size: 16pt;
+  color: black;
+}
+
+.nav-item-3 a {
+  text-decoration: none;
+  color: black;
+  font-size: 16pt;
+}
+
+.nav-item-2 a:visited {
+  color: black;
+}
+
+.nav-item-3 a:visited {
+  color: black;
+}
+
+.nav-item-2 a:hover {
+  text-decoration: underline;
+}
+
+.nav-item-3 a:hover {
+  text-decoration: underline;
+}
+
+.movie {
+  font-weight: bold;
+  max-width: 70%;
+  background-color: rgb(208, 208, 208);
+  margin: 20px;
+  padding: 25px;
+}
+
+.button {
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  border: 2px solid rgb(127, 127, 127);
+  background-color: whitesmoke;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.button a {
   text-decoration: none;
 }
 
-.main {
-  flex: 1;
-  padding: 20px;
+.button a:visited {
+  color: black;
+}
+
+.review-text {
+  padding: 10px;
+}
+
+.review-quote {
+  font-size: 13pt;
+}
+
+.review-links {
+  padding-left: 20px;
+  text-decoration: none;
+  color: rgb(54, 54, 54);
+}
+
+.review-quote a:visited {
+  color: rgb(54, 54, 54);
+}
+
+.review-quote a:hover {
+  text-decoration: underline;
 }
 
 .footer {
-  background-color: grey;
+  background-color: rgb(208, 208, 208);
+  padding: 20px;
+  margin-top: 20px;
   text-align: center;
+  position: absolute;
+  bottom: -80px;
+  width: 100%;
 }

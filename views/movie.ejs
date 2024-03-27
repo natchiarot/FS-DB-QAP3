@@ -12,44 +12,44 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="movies">
-                <h1>Movie</h1>
-            </div>
 
-            <div class="movie">
-                <!-- Check if there is at least one movie -->
-                <% if (theMovie.length> 0) var movie=theMovie[0]; { %>
-
-                    <h2><i class="fa-solid fa-clapperboard"></i>
-                        <%= movie.title %>
-                    </h2>
-
-                    <h4>Directed By: <%= movie.director%>
-                    </h4>
-                    <p>
-                        Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' ,
-                            month: 'long' , day: 'numeric' }) %> <br>
-                            Description: <%= movie.description %> <br>
-                                Genre: <%= movie.genre_name %>
-                    </p>
-
-                    <p>
-                        <% if (movie.rating && movie.rating.length> 0) { %>
-                            Reviews: <%= movie.rating %> <i class="fa-solid fa-star"></i><br>
-                                <div class="review-quote">
-                                    <i>
-                                        "<%= movie.review_text %>"
-                                    </i>
-                                    <% } else { %>
-                                        <i>No reviews yet.</i>
-                                        <% } %>
-                                </div>
-                    </p>
-                    <br>
-                    <% } %>
-            </div>
+        <div class="movies">
+            <h1>Movie</h1>
         </div>
+
+        <div class="movie">
+            <!-- Check if there is at least one movie -->
+            <% if (theMovie.length> 0) var movie=theMovie[0]; { %>
+
+                <h2><i class="fa-solid fa-clapperboard"></i>
+                    <%= movie.title %>
+                </h2>
+
+                <h4>Directed By: <%= movie.director%>
+                </h4>
+                <p>
+                    Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' , month: 'long' ,
+                        day: 'numeric' }) %> <br>
+                        Description: <%= movie.description %> <br>
+                            Genre: <%= movie.genre_name %>
+                </p>
+
+                <p>
+                    <% if (movie.rating && movie.rating.length> 0) { %>
+                        Reviews: <%= movie.rating %> <i class="fa-solid fa-star"></i><br>
+                            <div class="review-quote">
+                                <i>
+                                    "<%= movie.review_text %>"
+                                </i>
+                                <% } else { %>
+                                    <i>No reviews yet.</i>
+                                    <% } %>
+                            </div>
+                </p>
+                <br>
+                <% } %>
+        </div>
+
     </main>
 
     <footer>

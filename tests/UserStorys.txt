@@ -1,0 +1,9 @@
+﻿1. As a Movie Archive customer I can see a web page listing all the movies and their respective reviews and genres from the database.
+
+2. As a 
+Movie Archive
+business partner I can fetch all the movies + genres and movie reviews from the database from a REST API. The records will be returned as json data.
+
+3. As a Movie Archive staff member I can see a web page that will allow me to add a new movie or review to the database.
+
+4. As a Movie Archive customer I can leave a review on a movie.

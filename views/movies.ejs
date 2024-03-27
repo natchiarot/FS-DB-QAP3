@@ -45,7 +45,6 @@
                 <% if (!displayedMovieIds[movie.movie_id]) { %>
 
                     <div class="movie">
-                        <p>
 
                         <h2>
                             <i class="fa-solid fa-clapperboard"></i>
@@ -54,44 +53,43 @@
 
                         <h4>Directed By: <%= movie.director%>
                         </h4>
+                        <p>
+                            Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' ,
+                                month: 'long' , day: 'numeric' }) %> <br> <br>
+                                <%= movie.description %> <br>
+                                    Genre: <%= movie.genre_name %>
+                        </p>
 
-                        Release date: <%= movie.release_date.toLocaleDateString('en-US', {year: 'numeric' ,
-                            month: 'long' , day: 'numeric' }) %> <br> <br>
-                            <%= movie.description %> <br>
-                                Genre: <%= movie.genre_name %>
+                        <p>
+                            <a href="/movies/<%=movie.movie_id%>/edit" class="button">Edit</a>
+                            <a href="/movies/<%=movie.movie_id%>/replace" class="button">Replace</a>
+                            <a href="/movies/<%=movie.movie_id%>/delete" class="button">Delete</a>
+                        </p>
 
-                                    </p>
-
-                                    <p>
-                                        <a href="/movies/<%=movie.movie_id%>/edit" class="button">Edit</a>
-                                        <a href="/movies/<%=movie.movie_id%>/replace" class="button">Replace</a>
-                                        <a href="/movies/<%=movie.movie_id%>/delete" class="button">Delete</a>
-                                    </p>
-
-                                    <!-- Chose to do the if statement based on the rating because the rating has the NOT NULL property.
+                        <!-- Chose to do the if statement based on the rating because the rating has the NOT NULL property.
                     Therefore, if there's no rating, there is no review at all. -->
-                                    <div class="review-text">
-                                        <% if (movie.rating && movie.rating.length> 0) { %>
-                                            <h3>Most Recent Review:</h3>
-                                            Rating: <%= movie.rating %> <i class="fa-solid fa-star"></i><br> <br>
-                                                <div class="review-quote">
-                                                    <i>
-                                                        "<%= movie.review_text %>"
+                        <div class="review-text">
+                            <% if (movie.rating && movie.rating.length> 0) { %>
+                                <h3>Most Recent Review:</h3>
+                                Rating: <%= movie.rating %> <i class="fa-solid fa-star"></i><br> <br>
+                                    <div class="review-quote">
+                                        <i>
+                                            "<%= movie.review_text %>"
 
-                                                    </i>
+                                        </i>
 
-                                                    <a href="/reviews/<%= movie.movie_id %>/allreviews"
-                                                        class="review-links">See All Reviews</a>
-                                                    <% } else { %>
-                                                        <i>No reviews yet.</i>
-                                                        <% } %>
+                                        <a href="/reviews/<%= movie.movie_id %>/allreviews" class="review-links">See All
+                                            Reviews</a>
+                                        <% } else { %>
+                                            <i>No reviews yet.</i>
+                                            <% } %>
 
-                                                            <a href="/reviews/<%= movie.movie_id %>/postreview"
-                                                                class="review-links">Add
-                                                                Review</a>
-                                                            </p>
-                                                </div>
+                                                <a href="/reviews/<%= movie.movie_id %>/postreview"
+                                                    class="review-links">Add
+                                                    Review</a>
+                                                </p>
                                     </div>
+                        </div>
 
 
                     </div>

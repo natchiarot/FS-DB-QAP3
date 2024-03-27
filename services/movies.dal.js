@@ -118,7 +118,7 @@ var putMovie = function (id, title, director, description) {
   });
 };
 
-// Function to edit a movie's title, director, and description by its id
+// Function to edit a movie by its id
 var patchMovie = function (id, title, director, description) {
   return new Promise(function (resolve, reject) {
     // SQL query to update a movie's title, director, and description

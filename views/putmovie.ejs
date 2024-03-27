@@ -12,24 +12,24 @@
     </header>
 
     <main>
-        <div class="container">
-            <div class="movies">
-                <h1>Movies</h1>
-                <p>Replace a Movie</p>
-            </div>
 
-            <div class="movie">
-                <form action="/movies/<%= locals.anId %>?_method=PUT" method="POST">
-                    <label>Replace movie title and director:
-                        <input type="text" name="title" value="<%= title %>" required>
-                        <input type="text" name="director" value="<%= director%>" required>
-                        <input type="text" name="description" value="<%= description%>" required>
-                    </label>
-                    <button class="button">Replace</button>
-                </form>
-                <a href="/movies"><button class="button">Cancel</button></a>
-            </div>
+        <div class="movies">
+            <h1>Movies</h1>
+            <p>Replace a Movie</p>
         </div>
+
+        <div class="movie">
+            <form action="/movies/<%= locals.anId %>?_method=PUT" method="POST">
+                <label>Replace movie title and director:
+                    <input type="text" name="title" value="<%= title %>" required>
+                    <input type="text" name="director" value="<%= director%>" required>
+                    <input type="text" name="description" value="<%= description%>" required>
+                </label>
+                <button class="button">Replace</button>
+            </form>
+            <a href="/movies"><button class="button">Cancel</button></a>
+        </div>
+
     </main>
 
     <footer>

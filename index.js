@@ -29,7 +29,7 @@ app.get("/", function (req, res) {
 const moviesRouter = require("./routes/movies");
 app.use("/movies", moviesRouter);
 
-// Reviews page
+// Reviews page route
 const reviewsRouter = require("./routes/reviews");
 app.use("/reviews", reviewsRouter);
 

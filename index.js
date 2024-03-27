@@ -29,6 +29,10 @@ app.get("/", function (req, res) {
 const moviesRouter = require("./routes/movies");
 app.use("/movies", moviesRouter);
 
+// Reviews page
+const reviewsRouter = require("./routes/reviews");
+app.use("/reviews", reviewsRouter);
+
 // Handling 404 errors for undefined routes
 app.use((req, res) => {
   res.status(404).render("404");

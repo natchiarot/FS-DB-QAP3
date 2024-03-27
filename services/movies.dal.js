@@ -1,15 +1,15 @@
 const dal = require("./pgdb");
 
-// Getting all the movies
+// Function to get all the movies with associated genres and reviews
 var getMovies = function () {
   return new Promise(function (resolve, reject) {
+    // SQL query to retrieve the movies with the associated genres and reviews
     const sql = `SELECT 
       movies.movie_id, 
       movies.title, 
       movies.release_date,
       movies.director, 
       movies.description, 
-      movies.poster_url, 
       genres.genre_name,
       reviews.review_id,
       reviews.rating,
@@ -30,22 +30,23 @@ var getMovies = function () {
         console.log("Error: ", err);
         reject(err);
       } else {
+        // Resolve with fetched movie data
         resolve(result.rows);
       }
     });
   });
 };
 
-// Getting movie by id
+// Function to get a movie by its id with associated genre and reviews
 var getMoviesById = function (id) {
   return new Promise(function (resolve, reject) {
+    // SQL query to retrieve a movie by its id with the associated genre and reviews
     const sql = `SELECT 
     movies.movie_id, 
     movies.title, 
     movies.release_date,
     movies.director, 
     movies.description, 
-    movies.poster_url, 
     genres.genre_name,
     reviews.review_id,
     reviews.rating,
@@ -61,13 +62,14 @@ var getMoviesById = function (id) {
         console.log("Error: ", err);
         reject(err);
       } else {
+        // Resolve with fetched movie data
         resolve(result.rows);
       }
     });
   });
 };
 
-// POST adding movies by title and director
+// Function to add a new movie to the database
 var postMovie = function (title, release_date, director, description) {
   return new Promise(function (resolve, reject) {
     // Debugging when I was having trouble with adding a movie
@@ -75,6 +77,8 @@ var postMovie = function (title, release_date, director, description) {
     // console.log("Release Date:", release_date);
     // console.log("Director:", director);
     // console.log("Description:", description);
+
+    // SQL query to insert a new movie
     const sql =
       "INSERT INTO movies (title, release_date, director, description) \
     VALUES ($1, $3, $2, $4)";
@@ -86,6 +90,7 @@ var postMovie = function (title, release_date, director, description) {
           console.log("Error: ", err);
           reject(err);
         } else {
+          // Resolve after adding the movie
           resolve(result.rows);
         }
       }
@@ -93,9 +98,10 @@ var postMovie = function (title, release_date, director, description) {
   });
 };
 
-// PUT replacing movie with new title and director
+// Function to replace a movie's title, director, and description by its id
 var putMovie = function (id, title, director, description) {
   return new Promise(function (resolve, reject) {
+    // SQL query to update a movie's title, director, and description
     const sql =
       "UPDATE movies \
     SET title = $2, director = $3, description = $4 \
@@ -105,15 +111,17 @@ var putMovie = function (id, title, director, description) {
         console.log("Error: ", err);
         reject(err);
       } else {
+        // Resolve after updating the movie
         resolve(result.rows);
       }
     });
   });
 };
 
-// PATCH editing movie title/ director
+// Function to edit a movie's title, director, and description by its id
 var patchMovie = function (id, title, director, description) {
   return new Promise(function (resolve, reject) {
+    // SQL query to update a movie's title, director, and description
     const sql =
       "UPDATE movies \
     SET title = $2, director = $3, description = $4 \
@@ -123,14 +131,17 @@ var patchMovie = function (id, title, director, description) {
         console.log("Error: ", err);
         reject(err);
       } else {
+        // Resolve after updating the movie
         resolve(result.rows);
       }
     });
   });
 };
 
+// Function to delete a movie and its associated reviews by its id
 var deleteMovie = function (id) {
   return new Promise(function (resolve, reject) {
+    // SQL query to delete reviews associated with the movie
     const reviewSql = "DELETE FROM reviews WHERE movie_id = $1";
     dal.query(reviewSql, [id], (err) => {
       if (err) {
@@ -140,18 +151,21 @@ var deleteMovie = function (id) {
       }
     });
 
+    // SQL query to delete the movie
     const movieSql = "DELETE FROM movies WHERE movie_id = $1";
     dal.query(movieSql, [id], (err, result) => {
       if (err) {
         console.log("Error: ", err);
         reject(err);
       } else {
+        // Resolve after deleting the movie
         resolve(result.rows);
       }
     });
   });
 };
 
+// Exporting functions for external use
 module.exports = {
   getMovies,
   getMoviesById,

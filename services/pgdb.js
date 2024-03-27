@@ -1,4 +1,5 @@
-// Just for connecting to DB
+// For connecting to DB
+// Personal info is contained in a .env (hidden file)
 const Pool = require("pg").Pool; // Connection pool
 const pool = new Pool({
   user: process.env.PG_USER,
